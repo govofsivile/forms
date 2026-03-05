@@ -62,6 +62,7 @@
     <!-- Citizenship Form -->
     <form id="citizenshipForm">
         <h2>Citizenship Registration</h2>
+
         <label>First Name:</label>
         <input type="text" id="citFirstName" required>
 
@@ -74,6 +75,9 @@
             <option value="M">M</option>
             <option value="X">X</option>
         </select>
+
+        <label>Residence Location:</label>
+        <input type="text" id="citResidence" placeholder="City, State/Region, Country" required>
 
         <button type="button" onclick="generateCitizenshipEmail()">Generate Email Text</button>
         <textarea id="citizenshipEmail" readonly placeholder="Email text will appear here..."></textarea>
@@ -151,7 +155,10 @@
             const first = document.getElementById("citFirstName").value;
             const last = document.getElementById("citLastName").value;
             const gender = document.getElementById("citGender").value;
-            const text = `To: ${govEmail}\nSubject: Citizenship Registration\n\nFirst Name: ${first}\nLast Name: ${last}\nGender Marker: ${gender}\n`;
+            const residence = document.getElementById("citResidence").value;
+
+            const text = `To: ${govEmail}\nSubject: Citizenship Registration\n\nFirst Name: ${first}\nLast Name: ${last}\nGender Marker: ${gender}\nResidence Location: ${residence}\n`;
+
             document.getElementById("citizenshipEmail").value = text;
         }
 
@@ -159,7 +166,9 @@
             const role = document.getElementById("indRole").value;
             const first = document.getElementById("indFirstName").value;
             const last = document.getElementById("indLastName").value;
+
             const text = `To: ${govEmail}\nSubject: Independent Candidacy\n\nRole Running For: ${role}\nFirst Name: ${first}\nLast Name: ${last}\n`;
+
             document.getElementById("independentEmail").value = text;
         }
 
@@ -169,7 +178,9 @@
             const mid = document.getElementById("partyLeaderMID").value;
             const role = document.getElementById("partyRole").value;
             const id = document.getElementById("partyID").value.toUpperCase();
+
             const text = `To: ${govEmail}\nSubject: Party Candidacy\n\nCandidate Name: ${first} ${last}\nParty Leader MID: ${mid}\nRole Running For: ${role}\nParty ID: ${id}\n`;
+
             document.getElementById("partyCandidacyEmail").value = text;
         }
 
@@ -178,7 +189,9 @@
             const email = document.getElementById("partyLeaderEmail").value;
             const mid = document.getElementById("partyLeaderMIDForm").value;
             const party = document.getElementById("partyName").value;
+
             const text = `To: ${govEmail}\nSubject: Party Formation\n\nParty Leader: ${name}\nEmail: ${email}\nMID: ${mid}\nParty Name: ${party}\n`;
+
             document.getElementById("partyFormationEmail").value = text;
         }
     </script>
