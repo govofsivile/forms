@@ -57,143 +57,180 @@
     </style>
 </head>
 <body>
-    <h1>Sivile Citizenship and Election Registration</h1>
 
-    <!-- Citizenship Form -->
-    <form id="citizenshipForm">
-        <h2>Citizenship Registration</h2>
+<h1>Sivile Citizenship and Election Registration</h1>
 
-        <label>First Name:</label>
-        <input type="text" id="citFirstName" required>
+<!-- Citizenship Form -->
+<form id="citizenshipForm">
+    <h2>Citizenship Registration</h2>
 
-        <label>Last Name:</label>
-        <input type="text" id="citLastName" required>
+    <label>First Name:</label>
+    <input type="text" id="citFirstName" required>
 
-        <label>Gender Marker:</label>
-        <select id="citGender">
-            <option value="F">F</option>
-            <option value="M">M</option>
-            <option value="X">X</option>
-        </select>
+    <label>Last Name:</label>
+    <input type="text" id="citLastName" required>
 
-        <label>Residence Address (Optional):</label>
-        <input type="text" id="citResidence" placeholder="Optional" required>
+    <label>Birthdate (DD/MM/YYYY):</label>
+    <input type="text" id="citBirthdate" placeholder="DD/MM/YYYY" pattern="\d{2}/\d{2}/\d{4}" required>
 
-        <button type="button" onclick="generateCitizenshipEmail()">Generate Email Text</button>
-        <textarea id="citizenshipEmail" readonly placeholder="Email text will appear here..."></textarea>
-    </form>
+    <label>Gender Marker:</label>
+    <select id="citGender">
+        <option value="F">F</option>
+        <option value="M">M</option>
+        <option value="X">X</option>
+    </select>
 
-    <!-- Independent Candidacy Form -->
-    <form id="independentForm">
-        <h2>Independent Candidacy</h2>
-        <label>Role Running For:</label>
-        <select id="indRole">
-            <option value="Emperor">Emperor</option>
-            <option value="Upper GA">Upper GA</option>
-            <option value="Lower GA">Lower GA</option>
-        </select>
+    <label>Residence Address (Optional):</label>
+    <input type="text" id="citResidence" placeholder="Optional">
 
-        <label>First Name:</label>
-        <input type="text" id="indFirstName" required>
+    <button type="button" onclick="generateCitizenshipEmail()">Generate Email Text</button>
+    <textarea id="citizenshipEmail" readonly placeholder="Email text will appear here..."></textarea>
+</form>
 
-        <label>Last Name:</label>
-        <input type="text" id="indLastName" required>
+<!-- Independent Candidacy Form -->
+<form id="independentForm">
+    <h2>Independent Candidacy</h2>
 
-        <button type="button" onclick="generateIndependentEmail()">Generate Email Text</button>
-        <textarea id="independentEmail" readonly placeholder="Email text will appear here..."></textarea>
-    </form>
+    <label>Role Running For:</label>
+    <select id="indRole">
+        <option value="Emperor">Emperor</option>
+        <option value="Upper GA">Upper GA</option>
+        <option value="Lower GA">Lower GA</option>
+    </select>
 
-    <!-- Party Candidacy Form -->
-    <form id="partyCandidacyForm">
-        <h2>Party Candidacy</h2>
-        <label>Candidate First Name:</label>
-        <input type="text" id="partyCandFirst" required>
+    <label>First Name:</label>
+    <input type="text" id="indFirstName" required>
 
-        <label>Candidate Last Name:</label>
-        <input type="text" id="partyCandLast" required>
+    <label>Last Name:</label>
+    <input type="text" id="indLastName" required>
 
-        <label>Party Leader MID:</label>
-        <input type="text" id="partyLeaderMID" required>
+    <button type="button" onclick="generateIndependentEmail()">Generate Email Text</button>
+    <textarea id="independentEmail" readonly placeholder="Email text will appear here..."></textarea>
+</form>
 
-        <label>Role Running For:</label>
-        <select id="partyRole">
-            <option value="Emperor">Emperor</option>
-            <option value="Upper GA">Upper GA</option>
-            <option value="Lower GA">Lower GA</option>
-        </select>
+<!-- Party Candidacy Form -->
+<form id="partyCandidacyForm">
+    <h2>Party Candidacy</h2>
 
-        <label>Party 3-Letter ID:</label>
-        <input type="text" id="partyID" maxlength="3" required>
+    <label>Candidate First Name:</label>
+    <input type="text" id="partyCandFirst" required>
 
-        <button type="button" onclick="generatePartyCandidacyEmail()">Generate Email Text</button>
-        <textarea id="partyCandidacyEmail" readonly placeholder="Email text will appear here..."></textarea>
-    </form>
+    <label>Candidate Last Name:</label>
+    <input type="text" id="partyCandLast" required>
 
-    <!-- Party Formation Form -->
-    <form id="partyFormationForm">
-        <h2>Party Formation</h2>
-        <label>Party Leader Name:</label>
-        <input type="text" id="partyLeaderName" required>
+    <label>Party Leader MID:</label>
+    <input type="text" id="partyLeaderMID" required>
 
-        <label>Party Leader Email:</label>
-        <input type="email" id="partyLeaderEmail" required>
+    <label>Role Running For:</label>
+    <select id="partyRole">
+        <option value="Emperor">Emperor</option>
+        <option value="Upper GA">Upper GA</option>
+        <option value="Lower GA">Lower GA</option>
+    </select>
 
-        <label>Party Leader MID:</label>
-        <input type="text" id="partyLeaderMIDForm" required>
+    <label>Party 3-Letter ID:</label>
+    <input type="text" id="partyID" maxlength="3" required>
 
-        <label>Party Name:</label>
-        <input type="text" id="partyName" required>
+    <button type="button" onclick="generatePartyCandidacyEmail()">Generate Email Text</button>
+    <textarea id="partyCandidacyEmail" readonly placeholder="Email text will appear here..."></textarea>
+</form>
 
-        <button type="button" onclick="generatePartyFormationEmail()">Generate Email Text</button>
-        <textarea id="partyFormationEmail" readonly placeholder="Email text will appear here..."></textarea>
-    </form>
+<!-- Party Formation Form -->
+<form id="partyFormationForm">
+    <h2>Party Formation</h2>
 
-    <script>
-        const govEmail = "govofsivile@proton.me";
+    <label>Party Leader Name:</label>
+    <input type="text" id="partyLeaderName" required>
 
-        function generateCitizenshipEmail() {
-            const first = document.getElementById("citFirstName").value;
-            const last = document.getElementById("citLastName").value;
-            const gender = document.getElementById("citGender").value;
-            const residence = document.getElementById("citResidence").value;
+    <label>Party Leader Email:</label>
+    <input type="email" id="partyLeaderEmail" required>
 
-            const text = `To: ${govEmail}\nSubject: Citizenship Registration\n\nFirst Name: ${first}\nLast Name: ${last}\nGender Marker: ${gender}\nResidence Location: ${residence}\n`;
+    <label>Party Leader MID:</label>
+    <input type="text" id="partyLeaderMIDForm" required>
 
-            document.getElementById("citizenshipEmail").value = text;
-        }
+    <label>Party Name:</label>
+    <input type="text" id="partyName" required>
 
-        function generateIndependentEmail() {
-            const role = document.getElementById("indRole").value;
-            const first = document.getElementById("indFirstName").value;
-            const last = document.getElementById("indLastName").value;
+    <button type="button" onclick="generatePartyFormationEmail()">Generate Email Text</button>
+    <textarea id="partyFormationEmail" readonly placeholder="Email text will appear here..."></textarea>
+</form>
 
-            const text = `To: ${govEmail}\nSubject: Independent Candidacy\n\nRole Running For: ${role}\nFirst Name: ${first}\nLast Name: ${last}\n`;
+<script>
+const govEmail = "govofsivile@proton.me";
 
-            document.getElementById("independentEmail").value = text;
-        }
+function generateCitizenshipEmail() {
+    const first = document.getElementById("citFirstName").value;
+    const last = document.getElementById("citLastName").value;
+    const birthdate = document.getElementById("citBirthdate").value;
+    const gender = document.getElementById("citGender").value;
+    const residence = document.getElementById("citResidence").value;
 
-        function generatePartyCandidacyEmail() {
-            const first = document.getElementById("partyCandFirst").value;
-            const last = document.getElementById("partyCandLast").value;
-            const mid = document.getElementById("partyLeaderMID").value;
-            const role = document.getElementById("partyRole").value;
-            const id = document.getElementById("partyID").value.toUpperCase();
+    const text = `To: ${govEmail}
+Subject: Citizenship Registration
 
-            const text = `To: ${govEmail}\nSubject: Party Candidacy\n\nCandidate Name: ${first} ${last}\nParty Leader MID: ${mid}\nRole Running For: ${role}\nParty ID: ${id}\n`;
+First Name: ${first}
+Last Name: ${last}
+Birthdate: ${birthdate}
+Gender Marker: ${gender}
+Residence Location: ${residence}
+`;
 
-            document.getElementById("partyCandidacyEmail").value = text;
-        }
+    document.getElementById("citizenshipEmail").value = text;
+}
 
-        function generatePartyFormationEmail() {
-            const name = document.getElementById("partyLeaderName").value;
-            const email = document.getElementById("partyLeaderEmail").value;
-            const mid = document.getElementById("partyLeaderMIDForm").value;
-            const party = document.getElementById("partyName").value;
+function generateIndependentEmail() {
+    const role = document.getElementById("indRole").value;
+    const first = document.getElementById("indFirstName").value;
+    const last = document.getElementById("indLastName").value;
 
-            const text = `To: ${govEmail}\nSubject: Party Formation\n\nParty Leader: ${name}\nEmail: ${email}\nMID: ${mid}\nParty Name: ${party}\n`;
+    const text = `To: ${govEmail}
+Subject: Independent Candidacy
 
-            document.getElementById("partyFormationEmail").value = text;
-        }
-    </script>
+Role Running For: ${role}
+First Name: ${first}
+Last Name: ${last}
+`;
+
+    document.getElementById("independentEmail").value = text;
+}
+
+function generatePartyCandidacyEmail() {
+    const first = document.getElementById("partyCandFirst").value;
+    const last = document.getElementById("partyCandLast").value;
+    const mid = document.getElementById("partyLeaderMID").value;
+    const role = document.getElementById("partyRole").value;
+    const id = document.getElementById("partyID").value.toUpperCase();
+
+    const text = `To: ${govEmail}
+Subject: Party Candidacy
+
+Candidate Name: ${first} ${last}
+Party Leader MID: ${mid}
+Role Running For: ${role}
+Party ID: ${id}
+`;
+
+    document.getElementById("partyCandidacyEmail").value = text;
+}
+
+function generatePartyFormationEmail() {
+    const name = document.getElementById("partyLeaderName").value;
+    const email = document.getElementById("partyLeaderEmail").value;
+    const mid = document.getElementById("partyLeaderMIDForm").value;
+    const party = document.getElementById("partyName").value;
+
+    const text = `To: ${govEmail}
+Subject: Party Formation
+
+Party Leader: ${name}
+Email: ${email}
+MID: ${mid}
+Party Name: ${party}
+`;
+
+    document.getElementById("partyFormationEmail").value = text;
+}
+</script>
+
 </body>
 </html>
